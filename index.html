@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Grade Calculator - Assignment 1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f0f2f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #e0e0e0;
+            font-size: 1.1em;
+        }
+
+        .results-box {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #1e3c72;
+            margin: 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .course-mark {
+            background-color: #f8f9fa;
+            padding: 10px 15px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border-left: 4px solid #1e3c72;
+        }
+
+        .final-grade {
+            background-color: #1e3c72;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .error-message {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Student Grade Calculator</h1>
+
+    <script>
+        
+        let numOfCourses = parseInt(prompt("How many courses do you want to enter? "));
+
+        // Initialize variables
+        let courseMarks = [];
+        let total = 0;
+        let counter = 1;
+
+        // Input validation for number of courses
+        if (isNaN(numOfCourses) || numOfCourses <= 0) {
+            document.write("Please enter a valid number of courses greater than 0!");
+        } else {
+            // Get course marks from user and calculate total
+            while (counter <= numOfCourses) {
+                // Get mark for current course, convert to number, and add to array
+                courseMarks.push(parseFloat(prompt(`Please enter the mark for course ${counter}: `)));
+                
+                // Add to running total
+                total += courseMarks[courseMarks.length - 1];
+                
+                counter++;
+            }
+
+            // Display all course marks
+            document.write("<h2>Your course marks are:</h2>");
+            for (let i = 0; i < courseMarks.length; i++) {
+                document.write(`Course ${i + 1}: ${courseMarks[i]}<br>`);
+            }
+
+            // Calculate average
+            let average = total / numOfCourses;
+            // Round to 2 decimal places
+            average = Math.round(average * 100) / 100;
+
+            // Determine grade based on average
+            let message = `<h2>Your final average is ${average}. `;
+            
+            if (average >= 0 && average <= 100) {
+                if (average >= 90) {
+                    message += "Your grade is A+</h2>";
+                } else if (average >= 80) {
+                    message += "Your grade is B</h2>";
+                } else if (average >= 70) {
+                    message += "Your grade is C</h2>";
+                } else if (average >= 60) {
+                    message += "Your grade is D</h2>";
+                } else {
+                    message += "Your grade is F</h2>";
+                }
+            } else {
+                message = "<h2>Sorry, all the marks have to be from minimum 0 to maximum 100!</h2>";
+            }
+
+            // Display final message with average and grade
+            document.write(message);
+        }
+    </script>
+</body>
+</html>
